@@ -3,13 +3,48 @@
 <?php  
  $connect = mysqli_connect("localhost", "root", "", "ams");  
  session_start();  
- if(isset($_SESSION["username"]))  
+ if(isset($_SESSION["email"]))  
  {  
-      header("location:entry.php");  
+     $email=$_SESSION["email"];
+		$var;
+		$sql_date = "SELECT type FROM  users WHERE email='$email'";
+		$result_date = mysqli_query($connect, $sql_date);
+		$data_date=array();
+		if (mysqli_num_rows($result_date)>0){
+		while($row_date = mysqli_fetch_array($result_date)){
+			$var=$row_date[0];
+		
+		}
+	}
+	
+	
+		
+		
+	
+
+		   
+		
+	if($var=='farmer'){
+		
+		
+		header("location:mayantha_Agri/farmer.php");
+	}
+	elseif ($var == 'vendor'){
+		
+		header("location:mayantha_Agri/vendor.php");
+	}
+	elseif ($var == 'collector'){
+		header("location:mayantha_Agri/collector.php");
+		
+	}
+	elseif ($var == 'shopowner'){
+		
+		header("location:mayantha_Agri/shop.php");
+	} 
  }  
  if(isset($_POST["register"]))  
  {  
-      if(empty($_POST["username"]) || empty($_POST["password"]))  
+      if(empty($_POST["email"]) || empty($_POST["password"]))  
       {  
            echo '<script>alert("Both Fields are required")</script>';  
       }  
@@ -25,11 +60,11 @@
         $password = md5($password); 
 		
 
-		$sql= "SELECT * FROM users WHERE name='$name'";
+		$sql= "SELECT * FROM users WHERE email='$email'";
 		$result= mysqli_query($connect,$sql);
 		$resultcheck=mysqli_num_rows($result);
 		
-		if(!preg_match("/^[a-zA-Z]*$/",$username) ){
+		if(!preg_match("/^[a-zA-Z]*$/",$name) ){
 			echo '<script>alert("Invalid username")</script>';
 		}
 		
@@ -44,7 +79,7 @@
 				
 			}
 			else{
-           $query = "INSERT INTO users (email,name,type,address,mobile no, password) VALUES('$email','$name','$type','$address','$mobile', '$password')";		   
+           $query = "INSERT INTO users (email,name,type,address,mobile, password) VALUES('$email','$name','$type','$address','$mobile', '$password')";		   
            if(mysqli_query($connect, $query))  
            {  
                 echo '<script>alert("Registration Done")</script>';  
@@ -56,21 +91,69 @@
  }  
  if(isset($_POST["login"]))  
  {  
-      if(empty($_POST["username"]) || empty($_POST["password"]))  
+      if(empty($_POST["email"]) || empty($_POST["password"]))  
       {  
            echo '<script>alert("Both Fields are required")</script>';  ///empty alert
       }  
       else  
       {  
-           $username = mysqli_real_escape_string($connect, $_POST["username"]);  
+           $email = mysqli_real_escape_string($connect, $_POST["email"]);  
            $password = mysqli_real_escape_string($connect, $_POST["password"]);  
            $password = md5($password);  
-           $query = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";  
+           $query = "SELECT * FROM users WHERE email = '$email' AND password = '$password'";  
            $result = mysqli_query($connect, $query);  
            if(mysqli_num_rows($result) > 0)  
            {  
-                $_SESSION['username'] = $username;  
-                header("location:entry.php");  
+                $_SESSION['email'] = $email;  
+                
+
+
+						$email=$_SESSION["email"];
+		$var;
+		$sql_date = "SELECT type FROM  users WHERE email='$email'";
+		$result_date = mysqli_query($connect, $sql_date);
+		$data_date=array();
+		if (mysqli_num_rows($result_date)>0){
+		while($row_date = mysqli_fetch_array($result_date)){
+			$var=$row_date[0];
+		
+		}
+	}
+	
+	
+		
+		
+	
+
+		   
+		
+	if($var=='farmer'){
+		
+		
+		header("location:mayantha_Agri/farmer.php");
+	}
+	elseif ($var == 'vendor'){
+		
+		header("location:mayantha_Agri/vendor.php");
+	}
+	elseif ($var == 'collector'){
+		header("location:mayantha_Agri/collector.php");
+		
+	}
+	elseif ($var == 'shopowner'){
+		
+		header("location:mayantha_Agri/shop.php");
+	}
+
+
+
+
+
+
+
+
+
+				
            }  
            else  
            {  
@@ -96,7 +179,7 @@
 
 .bg {
    
-    background-image: url("gg.jpg");
+    background-image: url("AgriChainMayantha/gg.jpg");
 
   
     height: 900px;; 

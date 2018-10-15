@@ -35,7 +35,7 @@ if(isset($_SESSION["email"]))
 $query = "INSERT INTO farmer_requests (email,type,quantity) VALUES('$email','$product','$quantity')";		   
            if(mysqli_query($connect, $query))  
            {  
-            header("location:AddProduct.php");   
+            header("location:SadilAddProduct.php");
         
 		}		   
 	  }

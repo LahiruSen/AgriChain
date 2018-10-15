@@ -70,7 +70,7 @@ CREATE TABLE `prices` (
 
 CREATE TABLE `shopkeeper_requests` (
   `email` varchar(100) NOT NULL,
-  `time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+  `time` timestamp NOT NULL  ON UPDATE CURRENT_TIMESTAMP,
   `type` varchar(100) NOT NULL,
   `quantity` int(11) NOT NULL,
   `recieved` tinyint(1) NOT NULL
@@ -91,9 +91,26 @@ CREATE TABLE `users` (
   `password` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+
+CREATE TABLE `delivery` (
+  `del_id` int(11) NOT NULL,
+  `type` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `quantity` int(11) ,
+  `status` varchar(50) NOT NULL,
+    `dist_id` int(50) NOT NULL
+      ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for delivery tables
+--
+ALTER TABLE `distributor_requests`
+  ADD PRIMARY KEY (`id`);
+
 
 --
 -- Indexes for table `farmer_requests`

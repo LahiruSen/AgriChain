@@ -2,7 +2,7 @@
 
 require 'db.php';
 
-$result = $mysqli->query("SELECT type_id,quantity,time FROM farmer_requests where active_status=1");
+$result = $mysqli->query("SELECT type,quantity,time FROM farmer_requests where active_status=1");
 if ($result->num_rows > 0) {
 
     $requests = array();
@@ -71,7 +71,7 @@ if ($result->num_rows > 0) {
 
             <form action="deactive_farmer_request.php" method="post">
 
-                <td> <?= $m['type_id'] ?></td>
+                <td> <?= $m['type'] ?></td>
                 <td> <?= $m['quantity'] ?></td>
                 <td>100</td>
                 <td><input class="btn btn-danger" type="submit" value="Update" name="update"></td>

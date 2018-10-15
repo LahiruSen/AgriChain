@@ -43,7 +43,7 @@ if (isset($_POST)) {
 
                 $time = $time_result_array['time'];
 
-                header("location: edit_record_farmer_form.php? time=$time");
+                header("location: SadilAddProduct.php");
                 die();
             }
             else {

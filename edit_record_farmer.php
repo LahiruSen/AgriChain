@@ -5,7 +5,7 @@ if (isset($_POST)) {
     if (isset($_POST['time'])) {
 
         $time = $_POST['time'];
-        $type_id = $_POST['type'];
+        $type = $_POST['type'];
 
         $quentity = $_POST['quentity'];
 
@@ -16,7 +16,7 @@ if (isset($_POST)) {
             if ($time_result->num_rows > 0) {
                 $time_result_array = $time_result->fetch_assoc();
                 $time = $time_result_array['time'];
-                $sql = "UPDATE `farmer_requests` SET `type_id` = '$type_id', `quantity` = '$quentity', `active_status` = b'1' WHERE farmer_requests`.`time` = '$time'";
+                $sql = "UPDATE `farmer_requests` SET `type` = '$type', `quantity` = '$quentity', `active_status` = b'1' WHERE farmer_requests`.`time` = '$time'";
                 if ($mysqli->query($sql)) {
                     header("Location: {$_REQUEST["destination"]}");
                 } else {
