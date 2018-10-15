@@ -42,12 +42,12 @@ if ($result->num_rows > 0) {
 
 <body>
 
-<div class="container-fluid" style="margin:0 ;">
-    <div class="row">
-        <div class="col-sm-2" style="background-color:lavender;"><?php include 'Agri/side.php'; ?> </div>
-        <div class="col-sm-10" style="background-color:lavenderblush;"></div>
-    </div>
-</div>
+    <!--<div class="container-fluid" style="margin:0 ;">-->
+    <!--    <div class="row">-->
+    <!--        <div class="col-sm-2" style="background-color:lavender;">--><?php //include 'Agri/side.php'; ?><!-- </div>-->
+    <!--        <div class="col-sm-10" style="background-color:lavenderblush;"></div>-->
+    <!--    </div>-->
+    <!--</div>-->
 
 <div class="container">
 

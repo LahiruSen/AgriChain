@@ -39,7 +39,11 @@ if (isset($_POST)) {
         }}
        else if (isset($_POST['update'])) {
             if ($time_result->num_rows > 0) {
-                header("location: edit_record_farmer.php");
+                $time_result_array = $time_result->fetch_assoc();
+
+                $time = $time_result_array['time'];
+
+                header("location: edit_record_farmer_form.php? time=$time");
                 die();
             }
             else {

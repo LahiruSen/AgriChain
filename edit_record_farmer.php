@@ -1,51 +1,43 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <title>Edit My Request</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <style>
-        <?php include "Agri/bootstrap.min.css";
-            include "Agri/bootstrap.css";
-            include "Agri/_variables.scss";
-            include "Agri/_bootswatch.scss"
+<?php
+require 'db.php';
+if (isset($_POST)) {
+
+    if (isset($_POST['time'])) {
+
+        $time = $_POST['time'];
+        $type_id = $_POST['type'];
+
+        $quentity = $_POST['quentity'];
+
+        $time_result = $mysqli->query("select * from farmer_requests where time= '$time'");
+
+
+
+            if ($time_result->num_rows > 0) {
+                $time_result_array = $time_result->fetch_assoc();
+                $time = $time_result_array['time'];
+                $sql = "UPDATE `farmer_requests` SET `type_id` = '$type_id', `quantity` = '$quentity', `active_status` = b'1' WHERE farmer_requests`.`time` = '$time'";
+                if ($mysqli->query($sql)) {
+                    header("Location: {$_REQUEST["destination"]}");
+                } else {
+
+                    $_SESSION['message'] = "Sorry.Update action could't be completed.";
+                    header("location: error.php");
+                    die();
+
+                }
+
+
+            } else {
+                $_SESSION['message'] = "Sorry.Data couldn't be found on database.";
+                header("location: error.php");
+                die();
+            }
+     }}
+else {
+    $_SESSION['message'] = "Inavalid Request";
+    header("location: error.php");
+    die();
+}
+
         ?>
-    </style>
-
-</head>
-
-<body>
-<?php include 'Agri/Nav_bar.php';?>
-<div class="container-fluid" style="margin:0 ;">
-    <div class="row">
-        <div class="col-sm-2" style="background-color:lavender;"><?php include 'Agri/side.php'; ?> </div>
-        <div class="col-sm-10" style="background-color:lavenderblush;"> </div>
-    </div>
-</div>
-
-<div class="container center_div">
-
-    <h1>Edit My Request</h1>
-    <form action="farmer_eddit_request.php" method="post" enctype="multipart/form-data">
-        <div class="field-wrap">
-            Type of Vegitable       :<br>
-            <input type="text" name="type"   required>
-            <br>
-            Quentity                :<br>
-            <input type="number" name = "quentity"  required>
-            <br>
-            <input class='button button-block' type="submit" value="Submit">
-        </div>
-
-    </form>
-
-</div>
-
-
-
-</body>
-
-</html>
